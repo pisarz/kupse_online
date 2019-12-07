@@ -1,0 +1,72 @@
+{% load cart_template_tags %}
+
+<nav class="navbar fixed-top navbar-expand-lg navbar-light white scrolling-navbar">
+    <div class="container">
+
+      <!-- Brand -->
+      <a class="navbar-brand waves-effect" href="/">
+        <strong class="blue-text">Kup'sę</strong><strong class="purple-text"> Online</strong>
+      </a>
+
+      <!-- Collapse -->
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- Links -->
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+        <!-- Left -->
+        <ul class="navbar-nav nav-pills mr-auto">
+          <li class="nav-item {% if request.path == "/" %}active{% endif %}">
+            <a class="nav-link waves-effect" href="/">Home</a>
+          </li>
+          <li class="nav-item {% if request.path == "/checkout/" %}active{% endif %}">
+            <a class="nav-link waves-effect" href="/checkout">Checkout</a>
+          </li>
+        </ul>
+
+        <!-- Right -->
+        <ul class="navbar-nav nav-pills nav-flex-icons">
+          {% if request.user.is_authenticated %}
+          <li class="nav-item">
+            <a href="{% url 'core:order-summary' %}" class="nav-link waves-effect">
+              <span class="badge red z-depth-1 mr-1"> {{ request.user|cart_item_count }} </span>
+              <i class="fas fa-shopping-cart"></i>
+              <span class="clearfix d-none d-sm-inline-block"> Koszyk </span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="https://www.facebook.com/Kupse.outlet/" class="nav-link waves-effect" target="_blank">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link waves-effect" href = "{% url 'account_logout' %}">
+              <span class="clearfix d-none d-sm-inline-block"></span> Wyloguj się</a>
+        </li>
+          {% else %}
+          <li class="nav-item {% if request.path == "/accounts/login/" %}active{% endif %}">
+              <a class="nav-link waves-effect" href = "{% url 'account_login' %}">
+                <span class="clearfix d-none d-sm-inline-block"></span> Zaloguj się </a>
+          </li>
+              
+          <li class="nav-item {% if request.path == "/accounts/signup/" %}active{% endif %}">
+            <a class="nav-link waves-effect" href = "{% url 'account_signup' %}">
+              <span class="clearfix d-none d-sm-inline-block"></span> Zarejestruj się </a>
+          </li>
+          <li class="nav-item">
+              <a href="https://www.facebook.com/Kupse.outlet/" class="nav-link waves-effect" target="_blank">
+                <span class="clearfix d-sm-inline-block" style="font-size: 16px;"><i class="fab fa-facebook-f"></i></span></a>
+                    
+                  
+          </li>
+            {% endif %}
+          </ul>
+
+      </div>
+
+    </div>
+  </nav>
+  <!-- Navbar -->
