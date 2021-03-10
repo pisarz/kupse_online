@@ -25,8 +25,16 @@ SECRET_KEY = 'wun-s_u_(87n0fel$4#-wj%y8$cdnivb&re79dy*tmslik*wtz'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    '192.168.1.236',
+    '127.0.0.1',
+]
 
+INTERNAL_IPS = [
+    '127.0.0.1',
+    '192.168.1.236',
+    '192.168.1.176',
+]
 
 # Application definition
 
@@ -44,11 +52,23 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'crispy_forms',
     'django_countries',
+    'debug_toolbar',
 
     'core'
 ]
 
+CACHES = {
+    'default': {
+        'BACKEND': 'django_redis.cache.RedisCache',
+        'LOCATION': 'redis://127.0.0.1:6379/',
+        'OPTIONS': {
+            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+        }
+    }
+}
+
 MIDDLEWARE = [
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',

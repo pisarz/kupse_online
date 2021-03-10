@@ -1,4 +1,5 @@
 from django.urls import path
+from django.views.decorators.cache import cache_page
 from .views import (
     HomeView,
     OrderSummaryView,
@@ -12,10 +13,10 @@ from .views import (
 app_name = 'core'
 
 urlpatterns = [
-    path('', HomeView.as_view(), name='home'),
-    path('checkout/', CheckoutView.as_view(), name='checkout'),
+    path('', cache_page(60 * 60)(HomeView.as_view()), name='home'),
+    path('checkout/', cache_page(60 * 60)(CheckoutView.as_view()), name='checkout'),
     path('order-summary/', OrderSummaryView.as_view(), name='order-summary'),
-    path('product/<slug>/', ItemDetailView.as_view(), name='product'),
+    path('product/<slug>/', cache_page(60 * 60)(ItemDetailView.as_view()), name='product'),
     path('add-to-cart/<slug>/', add_to_cart, name='add-to-cart'),
     path('remove-from-cart/<slug>/', remove_from_cart,
          name='remove-from-cart'),
