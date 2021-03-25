@@ -28,12 +28,18 @@ DEBUG = True
 ALLOWED_HOSTS = [
     '192.168.1.236',
     '127.0.0.1',
+    '0.0.0.0',
+    'localhost',
+    '172.23.0.3'
 ]
 
 INTERNAL_IPS = [
     '127.0.0.1',
     '192.168.1.236',
+    'localhost',
     '192.168.1.176',
+    '0.0.0.0',
+    '172.23.0.3'
 ]
 
 # Application definition
@@ -60,7 +66,8 @@ INSTALLED_APPS = [
 CACHES = {
     'default': {
         'BACKEND': 'django_redis.cache.RedisCache',
-        'LOCATION': 'redis://127.0.0.1:6379/',
+        'LOCATION': 'redis://172.23.0.2:6379/',
+        # 'LOCATION': 'redis://127.0.0.1:6379/',
         'OPTIONS': {
             'CLIENT_CLASS': 'django_redis.client.DefaultClient',
         }
