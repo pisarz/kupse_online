@@ -12,7 +12,7 @@ django-appconf==1.0.3
 django-autoslug==1.9.6
 django-countries==5.3.3
 django-crispy-forms==1.7.2
-django-debug-toolbar==1.10.1
+django-debug-toolbar==1.11.1
 django-imagekit==4.0.2
 django-polls==0.1
 docx==0.2.4
