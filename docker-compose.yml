@@ -3,9 +3,14 @@ version: "3.8"
 services:
   web:
     build: .
-    command: python manage.py runserver 0.0.0.0:8000
+    command: bash -c "python manage.py migrate --noinput && python manage.py runserver 0.0.0.0:8000"
     environment:
       - REDIS_LOCATION=redis://redis:6379/
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_PASSWORD=my_db@123
+      - DB_USER=postgres
+      - DB_NAME=my_db
     volumes:
       - $PWD/sqlite-data:/sqlite-data/
       - $PWD/Kupse:/code/
@@ -15,6 +20,7 @@ services:
       - "8000:8000"
     links:
       - redis
+      - db
   redis:
     image: 'redis:latest'
     environment:
@@ -22,9 +28,17 @@ services:
     networks:
       - kupse-dev
     ports:
-     - "6379:6379"
+      - "6379:6379"
     volumes:
-     - $PWD/redis-data:/data
+      - $PWD/redis-data:/data
+  db:
+    image: 'postgres:latest'
+    environment: 
+      - POSTGRES_PASSWORD=my_db@123
+    networks:
+      - kupse-dev
+    ports:
+      - "5432:5432"
 
 
 networks:
