@@ -1,11 +1,32 @@
 version: "3.8"
+
 services:
   web:
     build: .
-    command: python manage.py runserver 0.0.0.0:8000 --traceback
-    # volumes:
-    #   - .:/code
+    command: python manage.py runserver 0.0.0.0:8000
+    environment:
+      - REDIS_LOCATION=redis://redis:6379/
+    volumes:
+      - $PWD/sqlite-data:/sqlite-data/
+      - $PWD/Kupse:/code/
+    networks:
+      - kupse-dev
     ports:
       - "8000:8000"
+    links:
+      - redis
   redis:
-    image: "redis:alpine"
+    image: 'redis:latest'
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+    networks:
+      - kupse-dev
+    ports:
+     - "6379:6379"
+    volumes:
+     - $PWD/redis-data:/data
+
+
+networks:
+  kupse-dev:
+    name: kupse-dev

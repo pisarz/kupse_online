@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+import socket
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -33,14 +34,7 @@ ALLOWED_HOSTS = [
     '172.23.0.3'
 ]
 
-INTERNAL_IPS = [
-    '127.0.0.1',
-    '192.168.1.236',
-    'localhost',
-    '192.168.1.176',
-    '0.0.0.0',
-    '172.23.0.3'
-]
+INTERNAL_IPS = []
 
 # Application definition
 
@@ -58,7 +52,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'crispy_forms',
     'django_countries',
-    'debug_toolbar',
+    # 'debug_toolbar',
 
     'core'
 ]
@@ -66,7 +60,8 @@ INSTALLED_APPS = [
 CACHES = {
     'default': {
         'BACKEND': 'django_redis.cache.RedisCache',
-        'LOCATION': 'redis://172.23.0.2:6379/',
+        'LOCATION': os.getenv('REDIS_LOCATION','NULL'),
+        # 'LOCATION': 'redis://172.23.0.2:6379/',
         # 'LOCATION': 'redis://127.0.0.1:6379/',
         'OPTIONS': {
             'CLIENT_CLASS': 'django_redis.client.DefaultClient',
@@ -75,7 +70,7 @@ CACHES = {
 }
 
 MIDDLEWARE = [
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
+    # 'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -112,7 +107,7 @@ WSGI_APPLICATION = 'Kupse.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'NAME': os.path.join(BASE_DIR+'/../sqlite-data/', 'db.sqlite3'),
     }
 }
 
@@ -182,3 +177,12 @@ LOGIN_REDIRECT_URL = '/'
 # CRISPY FORMS
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+# Determine debug state.
+DEBUG = os.getenv("DEBUG", "True") == "True"
+
+# Add the debug toolbar.
+INSTALLED_APPS += ['debug_toolbar', ]
+MIDDLEWARE = ['debug_toolbar.middleware.DebugToolbarMiddleware'] + MIDDLEWARE
+hostname, _, ips = socket.gethostbyname_ex(socket.gethostname())
+INTERNAL_IPS = [ip[:-1] + '1' for ip in ips] + ['127.0.0.1', '10.0.2.2']
