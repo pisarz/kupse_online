@@ -24,15 +24,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'wun-s_u_(87n0fel$4#-wj%y8$cdnivb&re79dy*tmslik*wtz'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = [
-    '192.168.1.236',
-    '127.0.0.1',
-    '0.0.0.0',
-    'localhost',
-    '172.23.0.3'
-]
+ALLOWED_HOSTS = ['*']
 
 INTERNAL_IPS = []
 
@@ -61,7 +55,7 @@ CACHES = {
     'default': {
         'BACKEND': 'django_redis.cache.RedisCache',
         'LOCATION': os.getenv('REDIS_LOCATION', 'NULL'),
-        # 'LOCATION': 'redis://127.0.0.1:6379/',
+        #'LOCATION': 'redis://127.0.0.1:6379/',
         'OPTIONS': {
             'CLIENT_CLASS': 'django_redis.client.DefaultClient',
         }
@@ -120,7 +114,16 @@ DATABASES = {
         'PORT': os.getenv('DB_PORT', 'NULL')
     }
 }
-
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'my_db',
+#         'USER': 'postgres',
+#         'PASSWORD': 'my_db@123',
+#         'HOST': 'localhost',
+#         'PORT': '5432',
+#     }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
@@ -188,8 +191,6 @@ LOGIN_REDIRECT_URL = '/'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-# Determine debug state.
-DEBUG = os.getenv("DEBUG", "True") == "True"
 
 # Add the debug toolbar.
 INSTALLED_APPS += ['debug_toolbar', ]
