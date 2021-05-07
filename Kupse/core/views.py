@@ -62,6 +62,7 @@ class CheckoutView(View):
 class HomeView(ListView):
     model = Item
     paginate_by = 8
+    ordering = ['-id']
     template_name = "home.html"
 
 
