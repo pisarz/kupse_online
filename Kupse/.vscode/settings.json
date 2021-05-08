@@ -1,5 +1,9 @@
 {
+<<<<<<< HEAD
     "python.pythonPath": "venv/bin/python",
+=======
+    "python.pythonPath": "env/bin/python",
+>>>>>>> 04e7fab3d8d97c38644e36d1b43b57519ac9e3f7
     "python.linting.pycodestyleEnabled": true,
     "python.linting.pylintEnabled": false,
     "python.linting.enabled": true
