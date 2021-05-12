@@ -15,3 +15,7 @@ phases:
   post_build:
     commands:
       - docker push $TAG_NAME
+
+artifacts:
+  files:
+    - kupse-img-def.json
