@@ -1,22 +1,17 @@
 version: 0.2
 
-env:
-  shell: bash
-  parameter-store:
-    DB_HOST: "/kupse/DB_HOST"
-    DB_NAME: "/kupse/DB_NAME"
-    DB_PASSWORD: "/kupse/DB_PASSWORD"
-    DB_PORT: "/kupse/DB_PORT"
-    DB_USER: "/kupse/DB_USER"
-    REDIS_LOCATION: "/kupse/REDIS_LOCATION"
-
 phases:
   install:
     commands:
-      - find . -path “*/migrations/*.py” -not -name “__init__.py” -delete 
-      - find . -path “*/migrations/*.pyc” -delete 
-      - python manage.py makemigrations
-      - python manage.py migrate 
-      - python manage.py shell < script.py 
-      - python manage.py loaddata whole.json 
-      - python manage.py runserver 0.0.0.0:8000 --insecure
+      - ECR_REPOSITORY_URI=680696743786.dkr.ecr.eu-central-1.amazonaws.com/mkokocha-kupse
+      - NOW=$(date +"%Y%m%d_%H%M%S")
+      - TAG_NAME=$ECR_REPOSITORY_URI:latest
+  pre_build:
+    commands:
+      - $(aws ecr get-login --region eu-central-1 --no-include-email)
+  build:
+    commands:
+      - docker build -f Dockerfile -t $TAG_NAME .
+  post_build:
+    commands:
+      - docker push $TAG_NAME
