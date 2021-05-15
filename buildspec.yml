@@ -12,10 +12,11 @@ phases:
   build:
     commands:
       - docker build -f Dockerfile -t $TAG_NAME .
+      - 
   post_build:
     commands:
       - docker push $TAG_NAME
-
+      - printf '[{"name":"kupse-web","imageUri":"$TAG_NAME"}]' > kupse-img-def.json
 artifacts:
   files:
     - kupse-img-def.json
