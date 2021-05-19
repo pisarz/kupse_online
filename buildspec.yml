@@ -4,7 +4,7 @@ phases:
   install:
     commands:
       - ECR_REPOSITORY_URI=680696743786.dkr.ecr.eu-central-1.amazonaws.com/mkokocha-kupse
-      - NOW=$(TZ='Europe/Warsaw' date +"%Y-%m-%d_%H%M%S")
+      - NOW=$(TZ='Europe/Warsaw' date +"%Y%m%d_%H%M%S")
       - TAG_NAME=$ECR_REPOSITORY_URI:$NOW
   pre_build:
     commands:
