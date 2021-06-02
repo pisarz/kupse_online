@@ -17,7 +17,7 @@ pipeline {
         }
       }
     }
-    stage('Push image') {
+    /* stage('Push image') {
       steps{
         script {
           docker.withRegistry(
@@ -28,7 +28,7 @@ pipeline {
               }
         }
       }
-    }
+    } */
   }
 }
 
