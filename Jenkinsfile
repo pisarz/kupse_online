@@ -1,8 +1,8 @@
 pipeline {
-  environment {
+  /* environment {
     registry = "680696743786.dkr.ecr.eu-central-1.amazonaws.com/mkokocha-kupse"
     registryCredential = ‘my.aws.credentials’
-  }
+  } */
   agent any
   stages {
     stage('Cloning Git') {
