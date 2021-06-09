@@ -12,9 +12,7 @@ pipeline {
     }
     stage('Building image') {
       steps{
-        docker build -t kupse-jenkins:${BUILD_NUMBER} .
-        docker tag kupse-jenkins:${BUILD_NUMBER} jenkins-demo:latest  
-        }
+        docker build -t jenkins-kupse .
       }
     }
     /* stage('Push image') {
