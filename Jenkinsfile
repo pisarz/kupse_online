@@ -1,6 +1,3 @@
-import jenkins.model.*
-jenkins = Jenkins.instance
-
 pipeline {
   /* environment {
     registry = "680696743786.dkr.ecr.eu-central-1.amazonaws.com/mkokocha-kupse"
