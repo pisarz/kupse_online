@@ -9,12 +9,10 @@ pipeline {
       steps {
         git 'https://github.com/pisarz/kupse_online.git'
       }
-    }
     stage('Building image') {
       steps{
         docker build -t jenkins-kupse .
       }
-    }
     /* stage('Push image') {
       steps{
         script {
