@@ -1,3 +1,6 @@
+import jenkins.model.*
+jenkins = Jenkins.instance
+
 pipeline {
   /* environment {
     registry = "680696743786.dkr.ecr.eu-central-1.amazonaws.com/mkokocha-kupse"
@@ -12,8 +15,8 @@ pipeline {
     }
     stage('Building image') {
       steps{
-        script {
-          docker.build registry + ":$BUILD_NUMBER"
+        docker build -t kupse-jenkins:${BUILD_NUMBER} .
+        docker tag kupse-jenkins:${BUILD_NUMBER} jenkins-demo:latest  
         }
       }
     }
