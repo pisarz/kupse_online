@@ -165,7 +165,7 @@ STATIC_ROOT = ''
 
 STATIC_URL = '/static/'
 
-#STATICFILES_DIRS = (os.path.join('static'), )
+STATICFILES_DIRS = (os.path.join('static'), )
 
 parent_dir = os.path.abspath(os.path.dirname(__file__) + '/..')
 
