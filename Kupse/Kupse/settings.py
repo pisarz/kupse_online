@@ -167,10 +167,16 @@ STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (os.path.join('static'), )
 
-parent_dir = os.path.abspath(os.path.dirname(__file__) + '/..')
+#parent_dir = os.path.abspath(os.path.dirname(__file__) + '/..')
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media').replace('\\', '/')
+#MEDIA_ROOT = os.path.join(BASE_DIR, 'media').replace('\\', '/')
+#MEDIA_URL = '/media/'
+
+MEDIA_ROOT = ''
+
 MEDIA_URL = '/media/'
+
+MEDIAFILES_DIRS = (os.path.join('media'), )
 
 # Auth
 
