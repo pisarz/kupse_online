@@ -149,7 +149,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Poland'
 
 USE_I18N = True
 
@@ -169,14 +169,9 @@ STATICFILES_DIRS = (os.path.join('static'), )
 
 #parent_dir = os.path.abspath(os.path.dirname(__file__) + '/..')
 
-#MEDIA_ROOT = os.path.join(BASE_DIR, 'media').replace('\\', '/')
-#MEDIA_URL = '/media/'
-
-MEDIA_ROOT = ''
-
+MEDIA_ROOT = os.path.join(BASE_DIR, 'code/media').replace('\\', '/')
 MEDIA_URL = '/media/'
 
-MEDIAFILES_DIRS = (os.path.join('media'), )
 
 # Auth
 
