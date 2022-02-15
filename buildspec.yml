@@ -6,7 +6,7 @@ phases:
       - ECR_REPOSITORY_URI=680696743786.dkr.ecr.eu-central-1.amazonaws.com/mkokocha-kupse
       - NOW=$(TZ='Europe/Warsaw' date +"%Y%m%d_%H%M%S")
       - TAG_NAME=$ECR_REPOSITORY_URI:$NOW
-      - SOURCE_BRANCH=PVD-2301-update-da-da-hg-22
+      - SOURCE_BRANCH=$(echo PVD- 2301-update-da-da-hg-22)
       - echo $SOURCE_BRANCH | grep -P '^PVD-[\d]{1,6}-[\w.-]{0,127}$|develop' || { echo Invalid branch name \'$SOURCE_BRANCH\'; exit 1; }
   pre_build:
     commands:
